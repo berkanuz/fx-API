@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345678')
             ],
             [
-                'name' => 'berkan',
+                'name' => 'Berkan',
                 'email' => 'berkan@berkan.com',
                 'password' => Hash::make('12345678')
             ],

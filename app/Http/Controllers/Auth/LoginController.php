@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,3 +28,15 @@ class LoginController extends Controller
     
         return response(['token' => $userToken], 200);
     }
+
+    public function logout(Request $request)
+    {
+
+        $user = $request->user(); 
+        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+
+
+        return response('', 200);
+    }
+}
+

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 /*
 Route::get('/', function () {
     return view('welcome');
-}); */
+}); 
+*/
 
 
 
-
-Route::post('\login', 'App\Http\Controllers\LoginController@login');
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+Route::middleware('auth:sanctum')->post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
