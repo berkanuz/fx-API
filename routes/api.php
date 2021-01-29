@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
-Route::middleware('auth:sanctum')->post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+//Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+//Route::middleware('auth:sanctum')->post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
-Route::middleware('auth:sanctum')->get('/fxrate', 'App\Http\Controllers\FxRate\FxRateController@getFxRate');
+Route::get('/fxrate', 'App\Http\Controllers\FxRate\FxRateController@getFxRate');

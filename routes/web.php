@@ -14,13 +14,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
+
+Route::middleware('checkLogin')->get('/', function () {
+    return view('home');
 }); 
-*/
+
 
 
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
-Route::middleware('auth:sanctum')->post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
+

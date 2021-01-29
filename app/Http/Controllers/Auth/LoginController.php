@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use Redirect;
+use Session;
+
 
 class LoginController extends Controller
 {
@@ -24,19 +31,42 @@ class LoginController extends Controller
             ], 500);
         }
 
-        $userToken = $user->createToken('api-token')->plainTextToken;
+        Session::put('email', $request->email);
+        Session::put('password', $request->password);
+
+        //$userToken = $user->createToken('api-token')->plainTextToken;
     
-        return response(['token' => $userToken], 200);
+       // return response(['token' => $userToken], 200);
+        return Redirect::to( '/');
     }
 
     public function logout(Request $request)
     {
 
         $user = $request->user(); 
-        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+       // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
 
-        return response('', 200);
+        //return response('', 200);
+        return Redirect::to( '/');
+    }
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    /*protected $redirectTo = RouteServiceProvider::HOME;*/
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
     }
 }
-
