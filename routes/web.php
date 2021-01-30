@@ -19,13 +19,15 @@ Route::middleware('checkLogin')->get('/', function () {
     return view('home');
 }); 
 
-
+//Route::middleware('checkLogin')->get('/', 'App\Http\Controllers\Auth\Home\HomeController@redirectHome');
 
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
-
+//Route::middleware('checkToHome')->get('/login', 'App\Http\Controllers\Auth\LoginController@getuser');
+/*Route::middleware('checkToHome')->get('/login', function () {
+    return view('home');
+}); */

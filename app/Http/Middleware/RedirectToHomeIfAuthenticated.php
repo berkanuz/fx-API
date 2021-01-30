@@ -4,13 +4,17 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Auth;
+use Redirect;
+
+
+;
 use Session;
 use App\Models\User;
-use Redirect;
+
 use Illuminate\Support\Facades\Hash;
 
-
-class Auth
+class RedirectToHomeIfAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -21,17 +25,16 @@ class Auth
      */
     public function handle(Request $request, Closure $next)
     {
-        $email = Session::get('email');
-        $password = Session::get('password');
+        if(Auth::guest())
+        {
+            return Redirect::to( '/');
     
-        $user = User::where('email', $email)->first();
-    
-        if (! $user || ! Hash::check($password, $user->password)) {
-
+        }
+        else {
+            
             return Redirect::to( '/login');
         }
-        
+        //return $next($request);
 
-        return $next($request);
     }
 }

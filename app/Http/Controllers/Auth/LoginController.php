@@ -46,9 +46,14 @@ class LoginController extends Controller
         $user = $request->user(); 
        // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
+        Session::flush();
 
         //return response('', 200);
         return Redirect::to( '/');
+    }
+    public function getuser(Request $request)
+    {
+            return Redirect::to( '/');
     }
 
     use AuthenticatesUsers;
@@ -68,5 +73,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        //$this->middleware('Auth')->except('index'));
     }
 }
