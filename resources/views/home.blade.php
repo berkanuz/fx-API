@@ -31,7 +31,7 @@
                                 <tbody>
                                   <tr>
                                     <td>John</td>
-                                    <th scope="col">currencies()</th>
+                                    <th scope="col">currencies</th>
                                     <td>john@example.com</td>
                                   </tr>
                                   <tr>
@@ -54,4 +54,5 @@
         </div>
     </div>
 </div>
+
 @endsection
