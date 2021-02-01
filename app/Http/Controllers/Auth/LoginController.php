@@ -13,7 +13,9 @@ use App\Models\User;
 use Redirect;
 use Session;
 
+use Illuminate\Support\Facades\DB;
 
+use Auth;
 class LoginController extends Controller
 {
     public function login(Request $request)
@@ -31,23 +33,21 @@ class LoginController extends Controller
             ], 500);
         }
 
-        Session::put('email', $request->email);
-        Session::put('password', $request->password);
 
-        //$userToken = $user->createToken('api-token')->plainTextToken;
+        $userToken = $user->createToken('api-token')->plainTextToken;
+        Session::put('api-token', $userToken);
+        Session::put('user-id', $user->id);
     
-       // return response(['token' => $userToken], 200);
+        //return response(['token' => $userToken], 200);
         return Redirect::to( '/');
     }
 
     public function logout(Request $request)
-    {
-
-        $user = $request->user(); 
-       // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-
+    {   
+        $userId =Session::get('user-id');    
+        $tokens = DB::table('personal_access_tokens')->where('tokenable_id', $userId)->delete();
+        Auth::logout();
         Session::flush();
-
         //return response('', 200);
         return Redirect::to( '/');
     }
@@ -73,6 +73,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        //$this->middleware('Auth')->except('index'));
     }
 }

@@ -1,5 +1,7 @@
 //require('./bootstrap');
 //import axios from 'axios'
+
+
 const axios = require('axios');
 
 async function makeRequest() {
@@ -11,21 +13,27 @@ async function makeRequest() {
 	let res = await axios.get('http://api.currencylayer.com/live', {
 	  params: param
 	});
+	let source = res.data.source
 
-	console.log(res.request);
-	console.log(res.data);
+  var HTML = "";
+
+	for (const [key, value] of Object.entries(res.data.quotes)) {
+	
+	  //console.log(source, key.replace(source, ''), value);
+	  HTML += "<tr><td>"+source+"</td><td>"+ key.replace(source, '')+"</th><td>"+value+"</td></tr>";
+
+  }
+  
+  const tablo = document.getElementById('table-body');
+  tablo.innerHTML = HTML;
 }
 
 makeRequest();
 
 
 
-/*
-axios.get('http://api.currencylayer.com/live').then(resp => {
 
-    console.log(resp.data);
-});
-*/
+
 
 
 
