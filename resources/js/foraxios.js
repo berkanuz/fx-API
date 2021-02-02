@@ -24,15 +24,48 @@ async function makeRequest() {
 
   }
   
-  const tablo = document.getElementById('table-body');
-  tablo.innerHTML = HTML;
+  try{
+	  const tablo = document.getElementById('table-body');
+	  tablo.innerHTML = HTML;
+  }
+  catch{
+
+  }
 }
 
 makeRequest();
 
+/*function login() {
+	 let email = document.getElementById('email').value
+	 let password = document.getElementById('password').value
+	//console.log();
+	axios({
+	  method: 'post',
+	  url: 'http://localhost/laravel/fx-API/public/api/login',
+	  data: {
+	    email: email,
+	    password: password
+	  }
+	})
+	.then(function (response) {
+	    console.log(response.data.token);
+	    let token= response.data.token;
+	    //Session::put('api-token',$token);
+	    
+	    
+	    /*var username ='<%= Session["token"] %>';
+	        console.log(username);*/
+	     /*   sessionStorage.Token=token;
+	        console.log(sessionStorage.getItem('Token'));
+	        var test = "<?php echo Session::put('api-token', "+token+"); ?>";
+	        window.location.replace("http://localhost/laravel/fx-API/public/");
+	    
+	});
+} 
 
 
 
+*/
 
 
 

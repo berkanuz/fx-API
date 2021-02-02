@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!--<script>
+    let token = sessionStorage.getItem('Token');
+    console.log(token);
+    if (token == null || token == undefined){
+        window.location.replace("http://localhost/laravel/fx-API/public/login");
+        
+    }
+</script>-->
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

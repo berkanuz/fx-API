@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
+/*Route::get('/', function () {
 	if (Session::get('api-token')){
     	return view('home');	
 	}
@@ -23,4 +23,13 @@ Route::get('/logout', function (Request $request) {
 }); 
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+Auth::routes();
+
+*/
+Route::get('/', function () {
+    return view('home');	
+}); 
+Route::get('/login', function () {
+    return view('login');	
+}); 
 Auth::routes();

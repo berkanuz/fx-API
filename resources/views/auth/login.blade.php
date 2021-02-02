@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<!--<script>
+    let token =sessionStorage.getItem('Token');
+    if (token != null){
+        window.location.replace("http://localhost/laravel/fx-API/public/");
+    }
+</script> -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,8 +14,6 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -41,13 +45,42 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }} 
+
+                                <button onclick="loginn()" class="btn btn-primary">Login</button>
+                                <script>
+                                    function loginn() {
+                                        let email = document.getElementById('email').value
+                                        let password = document.getElementById('password').value
+                                        axios({
+                                          method: 'post',
+                                          url: 'http://localhost/laravel/fx-API/public/api/login',
+                                          data: {
+                                            email: email,
+                                            password: password
+                                          }
+                                        })
+                                        .then(function (response) {
+                                            console.log(response.data.token);
+                                            let token= response.data.token;
+                                            //Session::put('api-token',$token);
+                                            
+                                            
+                                            /*var username ='<%= Session["token"] %>';
+                                                console.log(username);*/
+                                                sessionStorage.Token=token;
+                                                console.log(sessionStorage.getItem('Token'));
+                                                var test = "<?php echo Session::put('api-token', 'asdf'); ?>";
+                                                var test2 = "<?php echo Session::get('api-token'); ?>";
+                                                console.log(test2);
+                                                window.location.replace("http://localhost/laravel/fx-API/public/");
+                                            
+                                        });
+                                    }
+                                </script>
                                 
                                 
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

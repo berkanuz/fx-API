@@ -8,9 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Scripts -->
-<script src="{{ asset('js/app.js')}}" defer></script>
-<script src="{{ asset('js/foraxios.js') }}"></script>
-<link href="{{ asset('css/app.css') }}"  rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/foraxios.js') }}"></script>
+    
+    <link href="{{ asset('css/app.css') }}"  rel="stylesheet">
+
 
     <title>ARF</title>
 
@@ -44,13 +46,48 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if (Session::has('api-token'))
+                        <button onclick="logoutt()" class="btn btn-primary">Logout</button>
+                        <script>
+                            function logoutt()
+                            {
+                                let token = sessionStorage.getItem('Token');
+                                console.log(token);
+                                axios({
+                                      method: 'post',
+                                      url: 'http://localhost/laravel/fx-API/public/api/logout',
+                                      headers: {
+                                        Authorization: "Bearer " + token
 
-                            @if (Session::has('api-token'))
+                                        }
+                                    })
+                                    .then(function (response) {
+
+                                        console.log(response);
+                                        sessionStorage.clear();
+                                        console.log(sessionStorage.getItem('Token'));
+                                        var test = "<?php echo Session::flush('api-token'); ?>";
+                                        window.location.replace("http://localhost/laravel/fx-API/public/login");
+                                    });
+
+
+                                }
+                        
+                            
+                        </script>
+                        @endif
+
+
+
+
+                         <!--   @if (Session::has('api-token'))
                             <li class="nav-item ">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
+
+
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -58,7 +95,7 @@
                                         <input type="hidden" name="headers[Authorization]" value="Bearer {{Session::get('api-token')}}" />
                                     </form>
                             </li>
-                            @endif
+                            @endif -->
                     </ul>
                 </div>
             </div>
