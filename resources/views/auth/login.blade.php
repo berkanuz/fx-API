@@ -44,11 +44,14 @@
                                 <button onclick="loginn()" class="btn btn-primary">Login</button>
                                 <script>
                                     function loginn() {
+                                        let baseURL='{{ env('API_URL') }}';
+                                        console.log(baseURL)
+                                        
                                         let email = document.getElementById('email').value
                                         let password = document.getElementById('password').value
                                         axios({
                                           method: 'post',
-                                          url: 'http://localhost/laravel/fx-API/public/api/login',
+                                          url: baseURL+'/login',
                                           data: {
                                             email: email,
                                             password: password

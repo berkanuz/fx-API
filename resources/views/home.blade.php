@@ -43,11 +43,13 @@
                         <script>
                             function logoutt()
                             {
+                                let baseURL='{{ env('API_URL') }}';
+                                        console.log(baseURL)
                                 let token = sessionStorage.getItem('Token');
                                 console.log(token);
                                 axios({
                                       method: 'post',
-                                      url: 'http://localhost/laravel/fx-API/public/api/logout',
+                                      url: baseURL+'/logout',
                                       headers: {
                                         Authorization: "Bearer " + token
 
