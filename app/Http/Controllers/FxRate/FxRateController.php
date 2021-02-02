@@ -22,10 +22,7 @@ public function getFxRate(Request $request)
 
 					'access_key' => '8f361b088f0c11f8d2821b6f69ae2d8d',
       				'currencies' => 'AUD,EUR,GBP,PLN' ,
-					/*'AUD',
-					'EUR',
-					'GBP',
-					'PLN'*/
+					
 
 				]
 			]);

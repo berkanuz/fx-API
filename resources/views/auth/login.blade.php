@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!--<script>
-    let token =sessionStorage.getItem('Token');
-    if (token != null){
-        window.location.replace("http://localhost/laravel/fx-API/public/");
-    }
-</script> -->
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,23 +57,16 @@
                                         .then(function (response) {
                                             console.log(response.data.token);
                                             let token= response.data.token;
-                                            //Session::put('api-token',$token);
-                                            
-                                            
-                                            /*var username ='<%= Session["token"] %>';
-                                                console.log(username);*/
-                                                sessionStorage.Token=token;
-                                                console.log(sessionStorage.getItem('Token'));
-                                                var test = "<?php echo Session::put('api-token', 'asdf'); ?>";
-                                                var test2 = "<?php echo Session::get('api-token'); ?>";
-                                                console.log(test2);
-                                                window.location.replace("http://localhost/laravel/fx-API/public/");
+                                            sessionStorage.Token=token;
+                                            console.log(sessionStorage.getItem('Token'));
+                                            var test = "<?php echo Session::put('api-token', 'asdf'); ?>";
+                                            var test2 = "<?php echo Session::get('api-token'); ?>";
+                                            console.log(test2);
+                                            window.location.replace("http://localhost/laravel/fx-API/public/");
                                             
                                         });
                                     }
                                 </script>
-                                
-                                
                             </div>
                         </div>
                 </div>

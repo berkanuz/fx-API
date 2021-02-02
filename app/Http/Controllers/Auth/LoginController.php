@@ -35,22 +35,15 @@ class LoginController extends Controller
 
 
         $userToken = $user->createToken('api-token')->plainTextToken;
-        //Session::put('api-token', $userToken);
-        //Session::put('user-id', $user->id);
-
+        
     
         return response(['token' => $userToken], 200);
-        //return Redirect::to( '/');
+        
     }
 
     public function logout(Request $request)
     {   
-       /* $userId =Session::get('user-id');    
-        $tokens = DB::table('personal_access_tokens')->where('tokenable_id', $userId)->delete();
-        Auth::logout();
-        Session::flush();
-        
-        return Redirect::to( '/'); */
+       
 
         $user = $request->user(); 
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
